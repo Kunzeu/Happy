@@ -1,0 +1,130 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Estilo del sobre */
+.envelope {
+  position: relative;
+  width: 700px;
+  height: 450px;
+  background: #ffcccc;
+  border: 2px solid #ff9999;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+  transform: scale(1.05);
+}
+
+/* Solapa del sobre */
+.flap {
+  position: absolute;
+  top: -140px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 350px solid transparent;
+  border-right: 350px solid transparent;
+  border-bottom: 140px solid #ff9999;
+  transition: transform 0.5s ease;
+  transform-origin: top;
+  z-index: 10;
+}
+
+/* Carta dentro del sobre - Centrada horizontalmente */
+.card {
+  position: absolute;
+  top: 50px;
+  left: 50%; /* Centramos horizontalmente */
+  transform: translateX(-50%); /* Compensamos la mitad del ancho */
+  width: 600px;
+  height: 550px;
+  background: #fff;
+  padding: 40px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translate(-50%, 100%); /* Ajustamos la posición inicial */
+  transition: opacity 0.5s ease, transform 0.8s ease;
+  text-align: center;
+  overflow-y: hidden;
+  z-index: 5;
+}
+
+.card h2 {
+  color: #ff5555;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.card p {
+  color: #333;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+/* Estado abierto del sobre */
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .card {
+  opacity: 1;
+  transform: translate(-50%, -300px); /* Ajustamos el desplazamiento vertical para que salga más y se centre */
+  z-index: 15;
+}
+
+/* Estilo de los corazones */
+.heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #ff5555;
+  transform: rotate(-45deg);
+  opacity: 0.7;
+  animation: float 5s ease-in-out infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #ff5555;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+
+.heart::after {
+  left: 10px;
+  top: 0;
+}
+
+/* Animación de flotación con movimiento lateral */
+@keyframes float {
+  0% {
+      transform: translateY(0) translateX(0) rotate(-45deg);
+      opacity: 0.7;
+  }
+  50% {
+      transform: translateY(-50vh) translateX(50px) rotate(-45deg);
+      opacity: 0.9;
+  }
+  100% {
+      transform: translateY(-100vh) translateX(-50px) rotate(-45deg);
+      opacity: 0;
+  }
+}
